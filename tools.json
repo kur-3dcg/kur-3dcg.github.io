@@ -1,0 +1,60 @@
+{
+  "site": {
+    "title": "ブルアカ攻略・ファンツールまとめ",
+    "intro": "kurが個人で作ったブルーアーカイブ関連のツールをまとめています。",
+    "links": [
+      { "label": "@kur_3dcg", "url": "https://x.com/kur_3dcg" }
+    ]
+  },
+  "tools": [
+    {
+      "name": "TL作成支援ツール",
+      "category": "総力戦",
+      "desc": "TLの自作支援ツール",
+      "thumb": "thumbs/blue-archive-tl-tool.png",
+      "page": "https://kur-3dcg.github.io/blue-archive-tl-tool/",
+      "note": "https://note.com/kur7263/n/n2b856fe0e2a4",
+      "video": "https://www.youtube.com/watch?v=2C3p7ev3360"
+    },
+    {
+      "name": "対抗戦編成相談室",
+      "category": "戦術対抗戦",
+      "desc": "攻撃編成の相談をできるサイト、URL共有で身内で相談も、SNSで共有して不特定多数に相談も可能",
+      "thumb": "thumbs/ba-arena-advisor.png",
+      "page": "https://ba-arena-advisor.vercel.app/",
+      "note": "https://note.com/kur7263/n/n9e296e4a3eb4?magazine_key=m0bdd4561ec4e",
+      "video": "https://www.youtube.com/watch?v=v2GFsyR-0i8"
+    },
+    {
+      "name": "戦術対抗戦 編成管理",
+      "category": "戦術対抗戦",
+      "desc": "戦術対抗戦の編成を記録するツール。匿名推測機能付き",
+      "thumb": "thumbs/ba-formation-manager.png",
+      "page": "https://kur-3dcg.github.io/ba-formation-manager/",
+      "note": "https://note.com/kur7263/n/n58d0f7df2779?magazine_key=m0bdd4561ec4e"
+    },
+    {
+      "name": "熟達証書シミュレーター",
+      "category": "ショップ",
+      "desc": "熟達証書ショップの購入シミュレートができる、購入計画も立てられる",
+      "thumb": "thumbs/ba-mastery-simulator.png",
+      "page": "https://kur-3dcg.github.io/ba-mastery-simulator/",
+      "note": "https://note.com/kur7263/n/n291ed8704338?magazine_key=m0bdd4561ec4e"
+    },
+    {
+      "name": "家具シミュレーションツール",
+      "category": "カフェ",
+      "desc": "カフェの配置をシミュレーションするツール。監獄カフェ向き",
+      "thumb": "thumbs/Furniture-placement-simulator.png",
+      "page": "https://kur-3dcg.github.io/Furniture-placement-simulator/"
+    },
+    {
+      "name": "戦術対抗戦石割収支集計ツール",
+      "category": "戦術対抗戦",
+      "desc": "戦術対抗戦の順位を割った石の数を記録して収支を出す記録ツール平均順位などのグラフも作成可能",
+      "thumb": "thumbs/Tactical-Battle-Stone-Accounting.png",
+      "page": "https://kur-3dcg.github.io/Tactical-Battle-Stone-Accounting/index.html",
+      "note": "https://note.com/kur7263/n/n339bc2c26901?magazine_key=m0bdd4561ec4e"
+    }
+  ]
+}

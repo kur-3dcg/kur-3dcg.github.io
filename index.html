@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E6E9EC;
+    --panel: #FFFFFF;
+    --ink: #1A1D21;
+    --sub: #5B636D;
+    --line: #C9CFD5;
+    --accent: #2E57D6;
+    --thumb-bg: #D3D8DE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191C;
+      --panel: #202328;
+      --ink: #E8EAED;
+      --sub: #9AA2AC;
+      --line: #33383F;
+      --accent: #7C9BFF;
+      --thumb-bg: #2A2E34;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 72px 0 40px; }
+  header h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  header p { margin: 16px 0 0; color: var(--sub); max-width: 40em; }
+  header .links { margin-top: 20px; display: flex; gap: 20px; flex-wrap: wrap; }
+  header .links a { color: var(--ink); font-weight: 500; }
+
+  nav.filter {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding: 16px 0 24px;
+    border-top: 1px solid var(--line);
+  }
+  nav.filter button {
+    font: inherit; font-size: 0.9rem;
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+  nav.filter button[aria-pressed="true"] {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  nav.filter button .n { color: var(--sub); margin-left: 4px; font-size: 0.8em; }
+  nav.filter button[aria-pressed="true"] .n { color: inherit; opacity: .7; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px 24px;
+    padding-bottom: 96px;
+  }
+  .tool { display: flex; flex-direction: column; }
+  .tool .thumb {
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: var(--thumb-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+  }
+  .tool .thumb img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    transition: transform .25s ease;
+  }
+  .tool .thumb:hover img { transform: scale(1.03); }
+  .tool .thumb .ph {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-size: 2.6rem; font-weight: 900; color: var(--sub);
+  }
+  .tool .cat { margin-top: 14px; font-size: 0.8rem; color: var(--accent); font-weight: 700; }
+  .tool h2 { margin: 2px 0 6px; font-size: 1.2rem; line-height: 1.4; }
+  .tool h2 a { color: inherit; text-decoration: none; }
+  .tool h2 a:hover { text-decoration: underline; }
+  .tool p { margin: 0; color: var(--sub); font-size: 0.93rem; }
+  .tool .actions { margin-top: 10px; display: flex; gap: 16px; font-size: 0.9rem; }
+  .tool .actions a { color: var(--ink); font-weight: 500; }
+
+  .msg { padding: 40px 0 96px; color: var(--sub); }
+  .msg code { background: var(--panel); padding: 2px 6px; border-radius: 4px; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 0 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  footer small { color: var(--sub); font-size: 0.85rem; }
+  .btn-contact {
+    font: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 10px 24px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity .15s;
+  }
+  .btn-contact:hover { opacity: .75; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .tool .thumb img { transition: none; } }
+  @media (max-width: 600px) { header { padding: 48px 0 28px; } .grid { gap: 28px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="title">Tools</h1>
+    <p id="intro"></p>
+    <div class="links" id="links"></div>
+  </header>
+  <nav class="filter" id="filter" aria-label="カテゴリで絞り込み"></nav>
+  <main class="grid" id="grid"></main>
+  <div class="msg" id="msg" hidden></div>
+  <footer>
+    <small>© kur</small>
+    <a class="btn-contact" href="contact.html">お問い合わせ</a>
+  </footer>
+</div>
+
+<script>
+(async () => {
+  const $ = id => document.getElementById(id);
+  let data;
+  try {
+    const res = await fetch("tools.json", { cache: "no-cache" });
+    if (!res.ok) throw new Error(res.status);
+    data = await res.json();
+  } catch (e) {
+    $("msg").hidden = false;
+    $("msg").innerHTML =
+      "tools.json を読み込めませんでした。ローカルで確認する場合は、このフォルダで " +
+      "<code>python -m http.server</code> を実行して <code>http://localhost:8000</code> を開いてください。";
+    return;
+  }
+
+  const site = data.site || {};
+  const tools = data.tools || [];
+
+  document.title = site.title || "Tools";
+  $("title").textContent = site.title || "Tools";
+  $("intro").textContent = site.intro || "";
+  (site.links || []).forEach(l => {
+    const a = document.createElement("a");
+    a.href = l.url; a.textContent = l.label; a.target = "_blank"; a.rel = "noopener";
+    $("links").appendChild(a);
+  });
+
+  // カテゴリ（JSONに出てくる順）
+  const cats = [...new Set(tools.map(t => t.category).filter(Boolean))];
+  let current = "すべて";
+
+  function renderFilter() {
+    const f = $("filter");
+    f.innerHTML = "";
+    ["すべて", ...cats].forEach(c => {
+      const n = c === "すべて" ? tools.length : tools.filter(t => t.category === c).length;
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", c === current);
+      b.innerHTML = `${esc(c)}<span class="n">${n}</span>`;
+      b.onclick = () => { current = c; renderFilter(); renderGrid(); };
+      f.appendChild(b);
+    });
+  }
+
+  function renderGrid() {
+    const g = $("grid");
+    g.innerHTML = "";
+    tools
+      .filter(t => current === "すべて" || t.category === current)
+      .forEach(t => {
+        const link = t.page || t.repo || "#";
+        const el = document.createElement("article");
+        el.className = "tool";
+        el.innerHTML = `
+          <a class="thumb" href="${esc(link)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+            <span class="ph">${esc((t.name || "?").slice(0, 1))}</span>
+          </a>
+          ${t.category ? `<div class="cat">${esc(t.category)}</div>` : ""}
+          <h2><a href="${esc(link)}" target="_blank" rel="noopener">${esc(t.name || "")}</a></h2>
+          <p>${esc(t.desc || "")}</p>
+          <div class="actions">
+            ${t.repo ? `<a href="${esc(t.repo)}" target="_blank" rel="noopener">GitHub</a>` : ""}
+            ${t.note ? `<a href="${esc(t.note)}" target="_blank" rel="noopener">使い方</a>` : ""}
+            ${t.video ? `<a href="${esc(t.video)}" target="_blank" rel="noopener">動画</a>` : ""}
+          </div>`;
+        if (t.thumb) {
+          const th = el.querySelector(".thumb");
+          const img = document.createElement("img");
+          img.alt = "";
+          img.loading = "lazy";
+          img.style.position = "relative"; // プレースホルダーの上に重ねる
+          img.onerror = () => {
+            console.warn("サムネを読み込めません:", t.thumb);
+            img.remove(); // 読み込めなければ頭文字のプレースホルダーを表示
+          };
+          img.src = t.thumb;
+          th.appendChild(img);
+        }
+        g.appendChild(el);
+      });
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, c =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  renderFilter();
+  renderGrid();
+})();
+</script>
+</body>
+</html>

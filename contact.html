@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お問い合わせ | ブルアカ攻略・ファンツールまとめ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #E6E9EC;
+    --panel: #FFFFFF;
+    --ink: #1A1D21;
+    --sub: #5B636D;
+    --line: #C9CFD5;
+    --accent: #2E57D6;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17191C;
+      --panel: #202328;
+      --ink: #E8EAED;
+      --sub: #9AA2AC;
+      --line: #33383F;
+      --accent: #7C9BFF;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic UI", "Meiryo", sans-serif;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 72px 0 40px; }
+  header h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; line-height: 1.1; }
+  header p { margin: 12px 0 0; color: var(--sub); }
+
+  .form-card {
+    background: var(--panel);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 96px;
+  }
+
+  .field { margin-bottom: 24px; }
+  .field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .field label .opt { font-weight: 400; color: var(--sub); margin-left: 6px; font-size: 0.8rem; }
+  .field label .req { color: var(--accent); margin-left: 4px; font-size: 0.8rem; }
+  .field input, .field textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--ink);
+    transition: border-color .15s;
+    appearance: none;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .field textarea { resize: vertical; min-height: 160px; }
+
+  .actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 8px; }
+  .btn-submit {
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 12px 32px;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity .15s;
+  }
+  .btn-submit:hover { opacity: .75; }
+  .btn-submit:disabled { opacity: .4; cursor: default; }
+  .back { color: var(--sub); font-size: 0.9rem; text-decoration: none; }
+  .back:hover { color: var(--ink); }
+
+  .thanks { display: none; text-align: center; padding: 48px 0; }
+  .thanks .icon { font-size: 2.4rem; margin-bottom: 16px; }
+  .thanks h2 { margin: 0 0 8px; font-size: 1.4rem; }
+  .thanks p { color: var(--sub); margin: 0 0 24px; }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  @media (max-width: 600px) {
+    header { padding: 48px 0 28px; }
+    .form-card { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>お問い合わせ</h1>
+    <p>ツールの不具合・ご要望などをお送りください。</p>
+  </header>
+
+  <div class="form-card">
+    <form id="form" target="hidden-iframe">
+      <div class="field">
+        <label for="name">お名前<span class="opt">任意</span></label>
+        <input type="text" id="name" name="entry.347497532" autocomplete="name">
+      </div>
+      <div class="field">
+        <label for="email">メールアドレス<span class="opt">任意</span></label>
+        <input type="email" id="email" name="entry.1683930318" autocomplete="email">
+      </div>
+      <div class="field">
+        <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+        <textarea id="message" name="entry.136106609" required></textarea>
+      </div>
+      <div class="actions">
+        <button type="submit" class="btn-submit">送信する</button>
+        <a class="back" href="index.html">← トップページに戻る</a>
+      </div>
+    </form>
+
+    <div class="thanks" id="thanks">
+      <div class="icon">✓</div>
+      <h2>送信しました</h2>
+      <p>お問い合わせありがとうございます。</p>
+      <a class="back" href="index.html">← トップページに戻る</a>
+    </div>
+  </div>
+</div>
+
+<!-- Google Forms への送信を受け取る非表示iframe -->
+<iframe name="hidden-iframe" style="display:none"></iframe>
+
+<script>
+  const form = document.getElementById("form");
+  const thanks = document.getElementById("thanks");
+  const FORM_ACTION =
+    "https://docs.google.com/forms/d/e/1FAIpQLSfAnz6kdP0cylTAz-pvqDAHslZtX_THfBbVwtFF6NHfLecPhg/formResponse";
+
+  form.addEventListener("submit", e => {
+    form.action = FORM_ACTION;
+    const btn = form.querySelector(".btn-submit");
+    btn.disabled = true;
+    btn.textContent = "送信中...";
+    setTimeout(() => {
+      form.style.display = "none";
+      thanks.style.display = "block";
+    }, 800);
+  });
+</script>
+</body>
+</html>
