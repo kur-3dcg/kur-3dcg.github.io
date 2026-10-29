@@ -17,6 +17,14 @@
       "video": "https://www.youtube.com/watch?v=2C3p7ev3360"
     },
     {
+      "name": "TLグラフィカルツール",
+      "category": "総力戦",
+      "desc": "TLをグラフィカルにするツール",
+      "thumb": "thumbs/ba-graphical-tl-tool.png",
+      "page": "https://kur-3dcg.github.io/ba-graphical-tl-tool/",
+      "note": "https://note.com/kur7263/n/n0ef683f27d80"
+    },
+    {
       "name": "対抗戦編成相談室",
       "category": "戦術対抗戦",
       "desc": "攻撃編成の相談をできるサイト、URL共有で身内で相談も、SNSで共有して不特定多数に相談も可能",
